@@ -18,11 +18,11 @@ int main(void)
 	{
 		printf("%d is Positive\n", n);
 	}
-	else if (n == 0)
+	if (n == 0)
 	{
 		printf("%d is Zero\n", n);
 	}
-	else if (n < 0)
+	if (n < 0)
 	{
 		printf("%d is Negavtive\n", n);
 	}
