@@ -26,9 +26,5 @@ int main(void)
 	{
 		printf("%d is Negavtive\n", n);
 	}
-	else
-	{
-		printf("ERROR");
-	}
 	return (0);
 }
