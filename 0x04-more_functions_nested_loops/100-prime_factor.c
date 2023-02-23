@@ -9,7 +9,7 @@ int main(void)
 {
 	long int n;
 	long int max;
-	long int x;
+	long int i;
 
 	n = 12852475143;
 	max = -1;
@@ -19,12 +19,12 @@ int main(void)
 		max = 2;
 		n /= 2;
 	}
-	for (x = 3; x <= sqrt(n); x = x + 2)
+	for (i = 3; i <= sqrt(n); i = i + 2)
 	{
-		while (n % x == 0)
+		while (n % i == 0)
 		{
-			max = x;
-			n = n / x;
+			max = i;
+			n = n / i;
 		}
 	}
 	if (n > 2)
