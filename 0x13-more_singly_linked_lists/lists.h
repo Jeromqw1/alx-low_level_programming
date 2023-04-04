@@ -1,7 +1,8 @@
-#ifndef _LIST_
-#define _LIST_
+#ifndef LISTS_H
+#define LISTS_H
+
 #include <stdio.h>
-#include <stdlib.>
+#include <stdlib.h>
 
 /**
 * struct listint_s - singly link of lists
@@ -10,17 +11,11 @@
 * Description: singly links listed node structure
 */
 
-typeof struct listint_s
+typedef struct listint_s
 {
 	int n;
 	struct listint_s *next;
-} listint_t
-
-typeof struct listp_s *next;
-{	void *p;
-	struct listp_s *next;
-} listp_t;
-
+} listint_t;
 
 
 size_t print_listint(const listint_t *h);
