@@ -1,49 +1,68 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "lists.h"
 /**
-* print_listint_safe - prints a linked list of integers, even if it has a loop.
-* @head: points to the head of the list
-* Return: the number of nodes in the list
-*/
+ * free_listp - frees a linked list
+ * @head: head of a list.
+ *
+ * Return: no return.
+ */
+void free_listp(listp_t **head)
+{
+	listp_t *turtle;
+	listp_t *hare;
+
+	if (head != NULL)
+	{
+		hare = *head;
+		while ((turtle = hare) != NULL)
+		{
+			hare = hare->next;
+			free(turtle);
+		}
+		*head = NULL;
+	}
+}
+
+/**
+ * print_listint_safe - prints a linked list.
+ * @head: head of a list.
+ *
+ * Return: number of nodes in the list.
+ */
 size_t print_listint_safe(const listint_t *head)
 {
-	const listint_t *turtle, *hare;
 	size_t count = 0;
+	listp_t *visited_nodes, *new_node, *add;
 
-	if (head == NULL)
-		exit(98);
-	turtle = head;
-	hare = head;
-
-	while (turtle && hare && hare->next)
+	visited_nodes = NULL;
+	while (head != NULL)
 	{
-		turtle = turtle->next;
-		hare = hare->next->next;
+		new_node = malloc(sizeof(listp_t));
 
-	if (turtle == hare)
-	{
-		printf("-> [%p] %d\n", (void *)turtle, turtule->n);
+		if (new_node == NULL)
+			exit(98);
+
+		new_node->p = (void *)head;
+		new_node->next = visited_nodes;
+		visited_nodes = new_node;
+
+		add = visited_nodes;
+
+		while (add->next != NULL)
+		{
+			add = add->next;
+			if (head == add->p)
+			{
+				printf("-> [%p] %d\n", (void *)head, head->n);
+				free_listint_t(&visited_nodes);
+				return (count);
+			}
+		}
+
+		printf("[%p] %d\n", (void *)head, head->n);
+		head = head->next;
 		count++;
-		break;
-	}
-		printf("[%p] %d\n", (void *)turtle, turtle->n);
-		count++;
-	}
-	if (turtle == NULL || hare == NULL || hare->next == NULL)
-	{
-		printf("[%p] %d\n", (void *)turtle, turtle->n);
-		count++;
 	}
 
-	turtle = turtle->next;
-	while (turtle != hare)
-	{
-		printf("[%p] %d\n", (voide *)turtle, turtle->n);
-	count++;
-	turtle = turtle->next;
-	}
-	printf("-> [%P] %d\n", (void *)turtle, turtle->n);
-	count++;
+	free_listint_t(&visited_nodes);
 	return (count);
 }
