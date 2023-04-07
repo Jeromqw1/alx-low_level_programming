@@ -1,35 +1,45 @@
 #include "main.h"
-#include <string.h>
-
 /**
- * append_text_to_file - appends text at the end of a file.
- * @filename: the name of the file.
- * @text_content: the NULL terminated string to add at the end of the file.
- * Return: 1 on success and -1 on failure.
- * If filename is NULL return -1.
- * If text_content is NULL, do not add anything to the file.
- * Return 1 if the file exists and -1 if the file does not exist or if
- * you do not have the required permissions to write the file.
+ * _strlen - Calculate the lenghts of a string.
+ * @str: The string whose length is to be calculated.
+ * Return: The length of the string.
+ */
+int _strlen(char *str)
+{
+	int char_count = 0;
+
+	while (*str++)
+		char_count++;
+
+	return (char_count);
+}
+/**
+ * append_text_to_file - Appends text to the end of a file.
+ * @filename: Name of the file to which text is to be appended.
+ * @text_content: The text to be appended.
+ * Return: 1 on success, -1 on failure.
  */
 int append_text_to_file(const char *filename, char *text_content)
 {
-	if (text_content == NULL)
-		return (1);
-	FILE *file;
-	size_t len;
-	size_t n;
-	
+	int fd_open, fd_write;
 
-	file = fopen(filename, "a");
-	if (file == NULL)
+	if (filename == NULL)
 		return (-1);
 
-	len = strlen(text_content);
-	n = fwrite(text_content, sizeof(char), len, file);
-	fclose(file);
+	fd_open = open(filename, O_WRONLY | O_APPEND);
+	if (fd_open == -1)
+		return (-1);
 
-	if (n != len)
-	return (-1);
+	if (text_content != NULL)
+	{
+		fd_write = write(fd_open, text_content, _strlen(text_content));
+		if (fd_write == -1)
+		{
+			close(fd_open);
+			return (-1);
+		}
+	}
 
+	close(fd_open);
 	return (1);
 }
