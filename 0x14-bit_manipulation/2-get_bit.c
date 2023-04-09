@@ -8,31 +8,18 @@
  */
 int get_bit(unsigned long int n, unsigned int index)
 {
-	unsigned long int bit_mask;
-	if (index >= sizeof(unsigned long int) * 8)
-		return (-1);
-	bit_mask = 1UL << index;
+	unsigned int x;
+	unsigned long int input_number = n;
 
-	if ((n & bit_mask) == 0)
+	if (input_number == 0 && index < 64)
 		return (0);
-	else
-		return (1);
+	for (x = 0; x <= 63; input_number >>= 1)
+	{
+		if (index == x)
+			return (input_number & 1);
+	}
+		{
+			return (n & 1);
+		}
+	return (-1);
 }
-/**
-* main - entry point
-* Return: always 0
-*/
-int main(void)
-{
-	unsigned long int n = 0x5A5A5A5A5A5A5A5A;
-	int bit_value;
-
-	bit_value = get_bit(n, 3);
-	printf("Value of bit at index 3: %d\n", bit_value);
-	bit_value = get_bit(n, 8);
-	printf("Value of bit at index 8: %d\n", bit_value);
-	bit_value = get_bit(n, 63);
-	printf("Value of bit at index 63: %d\n", bit_value);
-	return (0);
-}
-
