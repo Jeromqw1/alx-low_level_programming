@@ -7,13 +7,14 @@
 */
 int clear_bit(unsigned long int *n, unsigned int index)
 {
-	unsigned int i;
+    if (index >= sizeof(unsigned long int) * 8) // check if index is within range
+        return -1;
 
-	if (index > 63)
-		return (-1);
-	i = 1 << indext;
+    unsigned long int mask = 1UL << index; // create a mask with a 1 at the index position
+    mask = ~mask; // negate the mask to have a 0 at the index position
 
-	if (*n ^= i)
-		*n ^= i;
-	return (1);
+    *n &= mask; // clear the bit at the index position
+
+    return 1;
 }
+
