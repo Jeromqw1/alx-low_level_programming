@@ -8,18 +8,15 @@
  */
 int get_bit(unsigned long int n, unsigned int index)
 {
-	unsigned int x;
-	unsigned long int input_number = n;
+	unsigned long int bitmask = 1;
 
-	if (input_number == 0 && index < 64)
-		return (0);
-	for (x = 0; x <= 63; input_number >>= 1)
+	if (index > sizeof(n) * 8)
 	{
-		if (index == x)
-			return (input_number & 1);
+		return  (-1);
 	}
-		{
-			return (n & 1);
-		}
-	return (-1);
+	bitmask <<= index;
+	if (bitmask & n)
+		return (1);
+	else
+		return (0);
 }
