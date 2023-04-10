@@ -9,16 +9,16 @@
 */
 unsigned int flip_bits(unsigned long int n, unsigned long int m)
 {
-    unsigned long int x = n ^ m;
-    unsigned int count = 0;
+	unsigned long int bitmask = 0, index;
 
-    while (x)
-    {
-        if (x & 1)
-            count++;
-        x >>= 1;
-    }
-
-    return (count);
+	index = n ^ m;
+	while (index > 0)
+	{
+		if (index & 1)
+		{
+			bitmask++;
+		}
+		index >>= 1;
+	}
+	return (bitmask);
 }
-
